@@ -1,0 +1,664 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
+
+:root{ /*Crear una variable (custom properties) con la pseudoclase root, para poder acceder a las custom properties desde cualquier elemento*/
+    --padding-container: 100px 0; /*Crearemos estas variables*/
+    --color-title: #5ceed6;
+
+}
+
+body{
+    font-family:'Poppins', sans-serif;
+}
+
+.container{
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto; /*Se centra verticalmente y Margenes laterales automaticos*/
+    overflow: hidden; /*Todo lo que se salga de los margenes, se esconda*/
+
+    /* background-color: #000; */ /*Comentado para q no me aparezca el color negro encima del Container*/
+
+    padding: var(--padding-container); /*Tendra el padding de la variable que creamos en root*/
+}
+
+.hero{
+    width: 100%;
+    height: 100vh;
+    min-height: 600px; /*Estos dos son para los problemas de los Ipads*/
+    max-height: 800px;
+    position: relative; /*Para que los elementos se ubiquen dentro de este contenedor*/
+    display: grid; /*Para crear dos filas*/
+    grid-template-rows: 100px 1fr; /*Primera fila de 100px y la segunda que tome el contenido sobrante de los 100px de alto*/
+    color: #fff;
+}
+
+/*Crear un pseudo elemento a partir de Hero*/
+.hero::before{
+    content: ""; /*Contenido vacio*/
+    position: absolute; /*Para que se posicione absolutamente a su padre Hero*/
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(180deg, #0000008c 0%, #0000008c 100%), url("../Images/head.jpg"); /*180 grados, negro con transparencia 8c (a la mitad) con stop del 0%, y el otro color igual con stop del 100%. Es para colocarle una capa de transparencia a la imagen*/
+    background-size: cover; /*Esta cambiado (antes Cover Para que se adapte a la pagina la imagen de  fondo)*/
+    clip-path: polygon(0 0, 100% 0, 100% 94%, 50% 99%, 0 94%);
+    z-index: -1; /*Para que se vea el texto*/
+}
+
+.nav{
+    --padding-container:0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.nav_tittle{
+    font-weight: 300;
+}
+
+.nav_link{
+    margin-left: auto; /*Para q se pasen a la derecha*/
+    padding: 0;
+    display: grid;
+    grid-auto-flow: column; /*Para que la grid forme columnas, de ancho adaptado al contenido y con una separacion (gap) de 2em*/
+    grid-auto-columns: max-content;
+    gap: 2em;
+}
+
+.nav_items{
+    list-style: none; /*para que quite el estilo de lista, ya que lleva el estilo predeterminado de las listas (<li>)*/
+}
+
+.nav.links{
+    color: #fff;
+    text-decoration: none;
+}
+
+.nav_menu{
+    margin-left: auto;
+    cursor: pointer;
+    display: none; /*para que desaparezca hasta estar en dispositivos moviles*/
+}
+
+.nav_img{
+    display: block;
+    width: 30px;
+}
+
+.nav_close{
+    display: var(--show, none); /*como no declaramos la variable, va a desaparecer la X*/
+}
+
+.hero_container{
+    max-width: 800px;
+    --padding-container:0;
+    display: grid;
+    grid-auto-rows: max-content; /*Las filas que cree de forma automatica sean del maximo contenido*/
+    align-content: center; /*centrado vertical*/
+    gap: 1em;
+    padding-bottom: 100px;
+    text-align: center;
+}
+
+.hero_tittle{
+    font-size: 3rem;
+}
+
+.hero_paragraph{
+    margin-bottom: 20px;
+}
+
+.cta{ /*Boton de comenzar ahora*/
+    display: inline-block;
+    background-color: rgb(30, 196, 179);
+    justify-self: center; /*Para que el color de fondo no ocupe todo el ancho sino solo su contenido*/
+    color: #fff;
+    text-decoration: none;
+    padding: 13px 30px;
+    border-radius: 32px;
+}
+
+.about_icon{
+    color: #c8391c !important;
+    font-size: 100px;
+}
+
+.about{
+    text-align: center;
+}
+
+.subtitle{
+    color: var(--color-title);
+    font-size: 2rem;
+    margin-bottom: 25px;
+}
+
+.about_paragraph{
+    line-height: 1.7;
+}
+
+.about_main{ 
+    padding-top: 80px;
+    display: grid; 
+    width: 90%;
+    margin: 0 auto;
+    gap: 1em;
+    overflow: hidden;
+    grid-template-columns: repeat(auto-fit, minmax(250px, auto)); /*Crear columnas dinaminas: que repita cuantas columnas como sea posible con un minimo de 250px por columna y un maximo automatico*/
+}
+
+.about_icons{
+    display: grid;
+    gap: 1em;
+    justify-items: center; /*para centrar horizontalmente*/
+    width: 260px;
+    overflow: hidden;
+    margin: 0 auto; /*auto a los lados para que se centre horizontalemente*/
+}
+
+.about_icon{
+    width: 40px;
+}
+
+.knowledge{
+    background-color: #e5e5f7;
+    background-image:  radial-gradient(#444cf7 0.5px, transparent 0.5px), radial-gradient(#444cf7 0.5px, #e5e5f7 0.5px);
+    background-size: 20px 20px;
+    background-position: 0 0,10px 10px;
+    overflow: hidden;
+}
+
+.knowledge_container{
+    display: grid;
+    grid-template-columns: 1fr 1fr; /*Para que la columna y la imagen ocupen el menor contenido posible*/
+    gap: 1em;
+    align-items: center;
+}
+
+.knowledge_picture{
+    max-width: 500px; /*Limitara el contenedor que tiene la imagen, y luego a la imagen le dire que ocupe el 100% de su contenedor*/
+}
+
+.knowledge_paragraph{
+    line-height: 1.7;
+    margin-bottom: 15px;
+}
+
+.knowledge_img{
+    width: 100%;
+    display: block; /*Para evitar problemas con espacios verticales*/
+}
+
+.price{
+    text-align: center; /*El texto se centa*/
+}
+
+.price_table{
+    padding-top: 60px;
+    display: flex; /*Cada div se coloca en una columna*/
+    flex-wrap: wrap; /*Si no entran a los ancho, uno ira abajo*/
+    gap: 2.5em;
+    justify-content: space-evenly; /*Espacio equitativo hacia todas las esquinas de manera horizontal*/
+    align-items: center; /*Centrar verticalmente*/
+}
+
+.price_element{
+    background-color: rgba(30, 196, 179, 0.495);
+    text-align: center;
+    border-radius: 10px;
+    width: 330px;
+    padding: 40px;
+    --color-plan: #275e68; /*Creo propiedades personalizadas*/
+    --color-price: #275e68;
+    --bg-cta: #275e68;
+    --color-cta: #275e68;
+    --color-items: #275e68;
+}
+
+.price_name{
+    color: var(--color-plan);
+    margin-bottom: 15px;
+    font-weight: 300;
+}
+
+.price_price{
+    font-size: 2rem;
+    columns: var(--color-price);
+    color: #275e68;
+}
+
+.price_items{
+    margin-top: 35px;
+    display: grid;
+    gap: 1em;
+    font-weight: 300;
+    font-size: 1.2rem;
+    margin-bottom: 50px;
+    color: var(--color-items);
+}
+
+.price_cta{
+    display: block; /*Para que ocupe todo el ancho*/    
+    padding: 20px 0px;
+    border-radius: 10px;
+    text-decoration: none;
+    background-color: var(--bg-cta);
+    font-weight: 600;
+    box-shadow: 0 0 1px rgba(0, 0, 0, .5); /*Sombra*/
+    color: #00ffdd;
+}
+
+.price_element-best{
+    background-color: rgba(0, 255, 229, 0.827);
+    --color-plan: #275e68; /*Las propiedades personalizadas las modificare y solo afectara a este elemento*/
+    --color-price: #275e68;
+    --bg-cta: #275e68;
+    --color-cta: #275e68;
+    --color-items: #275e68;
+    width: 370px;
+    padding: 60px 40px;
+}
+
+.testimony{
+    background-color: #e5e5f7;
+}
+
+.testimony_container{
+    display: grid;
+    grid-template-columns: 50px 1fr 50px; /*Primera y tercera columna de 50px y la del medio, el espacio sobrante*/
+    gap: 1em;
+    align-items: center;
+}
+
+.testimony_body{
+    display: grid; /*Dos columnas*/
+    grid-template-columns: 1fr max-content; /*Una de una fraccion y la segunda del maximo contenido*/
+    justify-content: space-between; /*Para que el contenido se vaya  a las esquinas*/
+    align-items: center;
+    gap: 2em;
+    grid-column: 2/3; /*grid colum que empiece en la segunda linea y termine en la tercera*/
+    grid-row: 1/2; /*Que empiece en la primera fila y termine en la segunda*/
+    opacity: 0; /*Asi desaparecen*/
+    pointer-events: none; /*Para que no se puedan seleccionar*/
+}
+
+.testimony_body-show{
+    pointer-events: unset; /*Para que vaya a la funcionalidad original*/
+    opacity: 1;
+    transition: opacity 1.5s ease-in-out; /*Para que haga el efecto que aparece*/
+}
+
+.testimony_img{
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: 50% 49%; /*Pisiciono la imagen para que quede centrada horizontal y al 49% en vertical*/
+}
+
+.testimony_test{
+    max-width: 700px;
+}
+
+.testimony_course{
+    background-color: royalblue;
+    color: #fff;
+    display: inline-block;
+    padding: 5px;
+}
+
+.testimony_arrow{
+    width: 90%;
+    cursor: pointer;
+}
+
+.questions{
+    text-align: center;
+}
+
+.questions_container{
+    display: grid;
+    gap: 2em;
+    padding-top: 50px;
+    padding-bottom: 100px;
+}
+
+.questions_padding{
+    padding: 0;
+    transition: padding .3s; /*Transicion para la propiedad padding*/
+    border: 1px solid #275e68;
+    border-radius: 6px;
+}
+
+.questions_padding-add{ /*Modificador de estilo: padding de 30px que se agregara dinamicamente*/
+    padding-bottom: 30px;
+}
+
+.questions_answer{
+    padding: 0px 30px 0;
+    overflow: hidden; /*Esto combinado con el heigth de 0 de questions_show, el texto desaparece*/
+    
+}
+
+.questions_title{
+    text-align: left;
+    display: flex;
+    font-size: 20px;
+    padding: 20px 30px 20px;
+    cursor: pointer;
+    color: var(--color-title);
+    justify-content: space-between; /*Para mandarlo a las esquinas*/
+}
+
+.questions_arrow{
+    border-radius: 50%;
+    background-color: #275e68;
+    width: 25px; /*Con estas proximas propiedades hago que se vea redondo*/
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: flex-end; /*Para mandarlo al final*/
+    margin-left: 10px;
+    transition: transform .3s;
+}
+
+.questions_arrow-rotate{
+    transform: rotate(180deg);
+}
+
+.questions_show{
+    text-align: left;
+    height: 0;
+    transition: height .3s;
+}
+
+.questions_img{
+    display: block;
+}
+
+.questions_copy{
+    width: 60%;
+    margin: auto;
+    margin-bottom: 30px;
+}
+
+.footer{
+    background-color: #e5e5f7;
+}
+
+.footer_title{
+    font-weight: 300;
+    font-size: 2rem;
+    margin-bottom: 30px;
+}
+
+.footer_title, .footer_newsletter{
+    color: #fff;
+}
+
+.footer_container{
+    display: flex; /*Para poner un elemento al lado del otro*/
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #fff;
+    padding-bottom: 60px;
+}
+
+.nav-footer{
+    padding-bottom: 20px;
+    display: grid;
+    gap: 1em;
+    grid-auto-flow: row; /*roW = filas*/
+    height: 100%;
+}
+
+.nav_link-footer{
+    display: flex;
+    margin: 0;
+    margin-right: 20px;
+    flex-wrap: wrap; /*Por si los enclaces no entran en la misma linea, se desborden*/
+}
+
+.footer_inputs{
+    margin-top: 10px;
+    display: flex;
+    overflow: hidden;
+}
+
+.footer_input{
+    background-color: #fff;
+    height: 50px;
+    display: block;
+    padding-left: 10px;
+    border-radius: 6px;
+    font-size: 1rem;
+    outline: none;
+    border: none;
+    margin-right: 16px;
+}
+
+.footer_submit{
+    margin-left: auto; /*Para que lo mande a la derecha*/
+    display: inline-block;
+    height: 50px;
+    padding: 0 20px;
+    background-color: rgb(30, 196, 179);
+    border: none;
+    font-size: 1rem;
+    color: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.footer_copy{
+    --padding-container: 30px 0;
+    text-align: center;
+    color: #fff;
+}
+
+.footer_copyright{
+    font-weight: 300;
+}
+
+.footer_icons{
+    display: inline-flex; /*Inline para que se ponga uno al lado del otro y no uno abajo del otro*/
+    margin-bottom: 10px;
+}
+
+.footer_img{
+    width: 30px;
+}
+
+/*Media Queries: adaptacion a dispositivos moviles*/
+
+@media (max-width:800px){
+    .nav_menu{
+        display: block;
+        background-color: #5ceed6;
+        border-radius: 15%;
+    }
+
+    .nav_link-menu{
+        position: fixed;
+        background-color: #000;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column; /*Para que los elementos se pongan uno abajo del otro*/
+        justify-content: space-evenly; /*Verticalmente reparta el espacio equitativamente*/
+        align-items: center;
+        z-index: 100; /*Para que se sobreponga a todo el contenido*/
+        opacity: 0;
+        pointer-events: none; /*Para que no reconozca el mouse*/
+        transition: .7s opacity;
+    }
+
+    .nav_link-show{ /*Nav link sera modificador de nav link show*/
+        --show: block; /*Cuando un elemento tenga la clase nav link show, la custom property show exista y sea block*/
+        opacity: 1;
+        pointer-events: unset; /*Que los pointer event vuelvan al valor original*/
+    }
+
+    .nav_close{
+        position: absolute; /*Se colocara arriba a la derecha*/
+        top: 30px;
+        right: 30px;
+        width: 30px;
+        cursor: pointer;
+        background-color: #5ceed6;
+        border-radius: 15%;
+    }
+
+    .hero_tittle{
+        font-size: 2.5rem;
+    }
+
+    .about_main{
+        gap: 2em;
+    }
+
+    .about_icons:last-of-type{ /*De los iconos, toma al ultimo de su tipo*/
+        grid-column: 1/-1; /*Ira de la primera a la ultima columna y hara que se centre*/
+    }
+    
+    .knowledge_container{
+        grid-template-columns: 1fr; /*Que tenga 1 columa de 1 fraccion*/
+        grid-template-rows: max-content 1fr; /*Que tenga 2 filas*/
+        gap: 3em;
+        text-align: center;
+    }
+
+    .knowledge_picture{
+        grid-row: 1/2; /*Que vaya desde la linea en filas 1 a la 2da linea. Para que la imagen vaya arriba del texto planes de entrenameinto*/
+        justify-self: center; /*Centrado horizontal*/
+    }
+
+    .testimony_container{
+        grid-template-columns: 30px 1fr 30px; /*Para que tenga 3 columnas de distintos anchos*/
+    }
+
+    .testimony_body{
+        grid-template-columns: 1fr; /*Que tenga 1 columna*/
+        grid-template-rows: max-content max-content; /*Que tenga 2 filas*/
+        gap: 3em;
+        justify-items: center; 
+    }
+
+    .testimony_img{
+        width: 200px;
+        height: 200px;
+    }
+
+    .questions_copy{
+        width: 100%;
+    }
+
+    .footer_container{
+        flex-wrap: wrap; /*Cuando los elementos no entren en una linea, se desdoblen*/
+    }
+
+    .nav-footer{
+        width: 100%;
+        justify-items: center;
+    }
+
+    .nav_link-footer{
+        display: grid;
+        width: 100px;
+        justify-content: space-evenly;
+        margin: 0;
+        flex-wrap: wrap;
+    }
+
+    .footer_form{
+        width: 100%;
+        justify-content: space-evenly;
+    }
+
+    .footer_input{
+        flex: 1; /*Para que ocupe el espacio sobrante*/
+    }
+}
+
+@media (max-width:600px){
+    .hero_tittle{
+        font-size: 2rem;
+    }
+
+    .hero_paragraph{
+        font-size: 1rem;
+    }
+
+    .subtitle{
+        font-size: 1.8rem;
+    }
+
+    .price_element{
+        width: 90%;
+    }
+
+    .price_element-best{
+        width: 90%;
+        padding: 40px;
+    }
+
+    .price_price{
+        font-size: 2rem;
+    }
+
+    .testimony{
+        --padding-container: 60px 0;
+    }
+
+    .testimony_container{
+        grid-template-columns: 28px 1fr 28px;
+        gap: .9em;
+    }
+
+    .testimony_arrow{
+        width: 100%;
+    }
+
+    .testimony_course{
+        margin-top: 15px;
+    }
+
+    .questions_title{
+        font-size: 1rem;
+    }
+
+    .footer_title{
+        justify-self: start; /*Para que lo mande al principio*/
+        margin-bottom: 15px;
+    }
+
+    .nav-footer{
+        padding-bottom: 60px;
+    }
+
+    .nav_link-footer{
+        justify-content: space-between; /*Para que se peguen a las esquinas*/
+        width: 100%;
+    }
+
+    .footer_inputs{
+        flex-wrap: wrap;
+    }
+
+    .footer_input{
+        flex-basis: 100%;
+        margin: 0;
+        margin-bottom: 16px;
+    }
+
+    .footer_submit{
+        margin-right: auto; /*Para que lo centre*/
+        margin-left: 0;
+        /*Otra opcion: margin: 0 y widht 100%*/
+    }
+}
